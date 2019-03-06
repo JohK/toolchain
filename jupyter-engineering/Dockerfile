@@ -17,12 +17,15 @@ RUN conda install --quiet --yes \
 	'cartopy' \
 	'cantera::cantera' \
 	'scipy=1.2*' \
-	'conda-forge::uncertainties=3.0*' && \
+	'conda-forge::uncertainties=3.0*' \
 	#'menpo::opencv' && \
+	'conda-forge::opencv' && \
 	conda clean -tipsy && \
     pip install --no-cache-dir https://github.com/PyMesh/PyMesh/releases/download/v0.2.1/pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl \
 	coolprop \
-	jupyterlab_latex && \
+	jupyterlab_latex \
+	pyromat \
+	pvlib && \
     jupyter labextension install \ 
         @lckr/jupyterlab_variableinspector \
 	@jupyterlab/latex && \
