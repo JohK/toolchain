@@ -9,6 +9,6 @@ docker push
 
 To use the docker image run these commands
 ```bash
-docker create -i -t -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v $PWD:/home/jovyan/work --name pynb-kraftwerk johk/toolchain
+docker create -i -t -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v $PWD:/home/jovyan/work --name jupyter_kraftwerk johk/toolchain
 docker start jupyter_kraftwerk
 ```
