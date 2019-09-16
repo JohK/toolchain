@@ -1,6 +1,6 @@
 # Copyright (c) Johannes Kneer
 
-ARG BASE_CONTAINER=jupyter/scipy-notebook
+ARG BASE_CONTAINER=jupyter/scipy-notebook:latest
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Johannes Kneer <johannes.kneer@gmail.com>" 
@@ -20,19 +20,28 @@ RUN conda install --quiet --yes \
 	'conda-forge::uncertainties=3.0*' \
 	#'menpo::opencv' && \
 	'conda-forge::opencv' && \
-	conda clean -tipsy && \
-    pip install --no-cache-dir https://github.com/PyMesh/PyMesh/releases/download/v0.2.1/pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl \
+	conda clean -tipsy
+RUN pip install --no-cache-dir \
+#https://github.com/PyMesh/PyMesh/releases/download/v0.2.1/pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl \
 	coolprop \
 	jupyterlab_latex \
+	ipympl \
 	pyromat \
-	pvlib && \
+	pvlib \
+	fenics && \
+	#solcore && \ 
+    #pip install --no-deps --force-reinstall --upgrade --install-option="--with_pdd" solcore && \
     jupyter labextension install \ 
         @lckr/jupyterlab_variableinspector \
-	@jupyterlab/latex && \
+	@jupyter-widgets/jupyterlab-manager \
+	@jupyterlab/latex \
+	jupyter-matplotlib && \
     jupyter serverextension enable --sys-prefix jupyterlab_latex && \
     jupyter labextension list && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER 
+
+# solcore needs to be installed twice so dependencies don't fail
 
 #fenics?
 #pymesh?
