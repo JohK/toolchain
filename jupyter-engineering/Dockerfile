@@ -7,7 +7,8 @@ LABEL maintainer="Johannes Kneer <johannes.kneer@gmail.com>"
 USER root
 
 
-RUN apt-get update -q && apt-get install -qy --no-install-recommends --no-install-suggests \
+RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections && \
+    apt-get update -q && apt-get install -qy --no-install-recommends --no-install-suggests \
         texlive-latex-base texlive-latex-recommended texlive-science texlive-latex-extra texlive-fonts-recommended dvipng ghostscript && \
     rm -rf /var/lib/apt/lists/*
 
@@ -16,7 +17,7 @@ RUN conda install --quiet --yes \
 	'geopandas' \
 	'cartopy' \
 	'cantera::cantera' \
-	'scipy=1.2*' \
+	'scipy' \
 	'conda-forge::uncertainties=3.0*' \
 	#'menpo::opencv' && \
 	'conda-forge::opencv' && \
@@ -28,8 +29,8 @@ RUN pip install --no-cache-dir \
 	ipympl \
 	pyromat \
 	pvlib \
-	fenics && \
-	#solcore && \ 
+	fenics \
+	solcore && \ 
     #pip install --no-deps --force-reinstall --upgrade --install-option="--with_pdd" solcore && \
     jupyter labextension install \ 
         @lckr/jupyterlab_variableinspector \
