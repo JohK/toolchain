@@ -18,7 +18,7 @@ RUN conda install --quiet --yes \
 	'cartopy' \
 	'cantera::cantera' \
 	'scipy' \
-	'tables' \
+	'table' \
 	'conda-forge::uncertainties=3.0*' \
 	#'menpo::opencv' && \
 	'conda-forge::opencv' && \
