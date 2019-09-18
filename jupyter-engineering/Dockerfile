@@ -18,7 +18,6 @@ RUN conda install --quiet --yes \
 	'cartopy' \
 	'cantera::cantera' \
 	'scipy' \
-	'table' \
 	'conda-forge::uncertainties=3.0*' \
 	#'menpo::opencv' && \
 	'conda-forge::opencv' && \
@@ -26,6 +25,7 @@ RUN conda install --quiet --yes \
 RUN pip install --no-cache-dir \
 #https://github.com/PyMesh/PyMesh/releases/download/v0.2.1/pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl \
 	coolprop \
+	tables \
 	jupyterlab_latex \
 	ipympl \
 	pyromat \
