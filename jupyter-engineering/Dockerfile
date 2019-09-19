@@ -9,7 +9,7 @@ USER root
 
 RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections && \
     apt-get update -q && apt-get install -qy --no-install-recommends --no-install-suggests \
-        texlive-latex-base texlive-latex-recommended texlive-science texlive-latex-extra texlive-fonts-recommended dvipng ghostscript && \
+        texlive-latex-base texlive-latex-recommended texlive-science texlive-latex-extra texlive-fonts-recommended dvipng ghostscript ttf-mscorefonts-installer && \
     rm -rf /var/lib/apt/lists/*
 
 RUN conda install --quiet --yes \
