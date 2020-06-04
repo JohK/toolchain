@@ -31,7 +31,8 @@ RUN pip install --no-cache-dir \
 	pyromat \
 	pvlib \
 	fenics \
-	solcore && \ 
+	solcore \
+	pint && \ 
     #pip install --no-deps --force-reinstall --upgrade --install-option="--with_pdd" solcore && \
     jupyter labextension install \ 
         @lckr/jupyterlab_variableinspector \
