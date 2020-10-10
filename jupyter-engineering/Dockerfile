@@ -13,21 +13,26 @@ RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula selec
     rm -rf /var/lib/apt/lists/*
 
 RUN conda install --quiet --yes \
-	'astropy' \
+	'conda-forge::astropy' \
 	'geopandas' \
 	'cartopy' \
-	'cantera::cantera' \
-	'scipy' \
-	'conda-forge::uncertainties=3.1*' \ 
-	'conda-forge::voila' && \
+	#'cantera::cantera' \
+	'conda-forge::scipy' \
+	'conda-forge::uncertainties' \ 
+	'conda-forge::jupyter_nbextensions_configurator' \
+	'conda-forge::jupyterlab-git' \
+	'conda-forge::jupyterlab_latex' \
+#	'conda-forge::jupyterlab-python-file' \
+	'conda-forge::jupyterlab_code_formatter' \
+	'conda-forge::voila' \
 	#'menpo::opencv' && \
-	#'conda-forge::opencv' && \
+	'conda-forge::opencv' \
+	'conda-forge::fenics-dolfin' && \
 	conda clean -tipsy
 RUN pip install --no-cache-dir \
 #https://github.com/PyMesh/PyMesh/releases/download/v0.2.1/pymesh2-0.2.1-cp36-cp36m-linux_x86_64.whl \
 	coolprop \
 	tables \
-	jupyterlab_latex \
 	ipympl \
 	pyromat \
 	pvlib \
@@ -35,7 +40,9 @@ RUN pip install --no-cache-dir \
 	solcore \	
 	cookiecutter \
 	pythreejs \
-	pint 
+	pint \
+	pyFoam && \ 
+    pip install --upgrade jupyterlab-git
     #pip install --no-deps --force-reinstall --upgrade --install-option="--with_pdd" solcore && \
 RUN jupyter labextension install \ 
         @lckr/jupyterlab_variableinspector \
@@ -43,11 +50,12 @@ RUN jupyter labextension install \
 @jupyterlab/toc \
 	@jupyter-voila/jupyterlab-preview \
 	jupyter-threejs \
-	@jupyterlab/git \
+#	@jupyterlab/git \
 	@jupyterlab/celltags \
 #	@jupyterlab/latex \
 	jupyter-matplotlib && \
     jupyter serverextension enable --sys-prefix jupyterlab_latex && \
+    jupyter lab build && \
     jupyter labextension list && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER 
