@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+    openfoam:
+        #build: openfoam-com-release/
+        image: johk/toolchain-of:latest
+        # container_name: of_v2006  # not scalable
+        restart: always
+        environment: 
+            - DISPLAY=:1
+        volumes:
+            - x11tmp:/tmp/.X11-unix
+            - "${PROJECTDIR:-./workdir-CFD}:/home/ofuser/workdir-CFD"
+        depends_on:
+            - x11dummy
+
+    x11dummy:
+        build: X11dummy
+        volumes: 
+            - x11tmp:/tmp/.X11-unix
+
+volumes: 
+    x11tmp:
+
